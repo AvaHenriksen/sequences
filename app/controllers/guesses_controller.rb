@@ -1,14 +1,20 @@
 class GuessesController < ApplicationController
 
-  def attempt
-    if (params[:first_number] < params[:second_number]) && (params[:second_number] < params[:third_number])
-      @obedience_answer = "Obeys the rule"
-    elsif (params[:first_number] > params[:second_number]) || (params[:first_number] = params[:second_number]) || (params[:second_number] > params[:third_number]) || (params[:second_number] > params[:third_number]) || (params[:first_number] > params[:third_number]) || (params[:first_number] = params[:third_number])
-      @obedience_answer = "Does not obey the rule"
-
-    end
-    render ("attempt.html.erb")
+  def index
+    render("index.html.erb")
   end
+
+  def attempt
+    if params[:first_number].present? && params[:second_number].present? && params[:third_number].present?
+        if (params[:first_number].to_i < params[:second_number].to_i) && (params[:second_number].to_i < params[:third_number].to_i)
+          @obedience_answer = "Yes!"
+        else
+          @obedience_answer = "No."
+        end
+    end
+  render("attempt.html.erb")
+  end
+
 
 
 end
